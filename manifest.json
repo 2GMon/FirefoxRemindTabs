@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "firefox-addon-template",
-  "description": "firefox-addon-template",
+  "name": "RemindTabs",
+  "description": "Reopen the currently viewed website at the specified date and time.",
   "version": "0.0.1",
   "icons": {
     "64": "build/icons/icon.png"
