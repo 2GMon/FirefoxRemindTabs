@@ -5,6 +5,8 @@
         "module": "ES2015",
         "jsx": "react",
         "allowJs": true,
-        "strict": true
+        "strict": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true
     }
 }

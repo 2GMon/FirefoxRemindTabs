@@ -1,5 +1,7 @@
 {
   "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.2",
     "html-webpack-plugin": "^5.5.0",
@@ -15,5 +17,9 @@
     "watch": "webpack -w",
     "build": "webpack && web-ext --config my-config.js build --overwrite-dest",
     "lint": "web-ext --config my-config.js lint"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
