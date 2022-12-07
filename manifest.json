@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+  "name": "firefox-addon-template",
+  "description": "firefox-addon-template",
+  "version": "0.0.1",
+  "icons": {
+    "64": "build/icons/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mozilla.org/*"
+      ],
+      "js": [
+        "build/content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "64": "build/icons/icon.png"
+    },
+    "default_popup": "build/browserAction.html",
+    "default_title": "RemindTabs"
+  },
+  "page_action": {
+    "default_icon": {
+      "64": "build/icons/icon.png"
+    },
+    "default_popup": "build/pageAction.html",
+    "default_title": "RemindTabs",
+    "show_matches": [
+        "*://*/*"
+    ]
+  },
+  "options_ui": {
+    "page": "build/options.html"
+  }
+}

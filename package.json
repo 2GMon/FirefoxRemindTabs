@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.3",
+    "web-ext-plugin": "^2.7.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-remove-empty-scripts": "^1.0.1"
+  },
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack && web-ext --config my-config.js build --overwrite-dest",
+    "lint": "web-ext --config my-config.js lint"
+  }
+}
