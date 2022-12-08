@@ -1,4 +1,4 @@
-# firefox-addon-typescript-template
+# Firefox RemindTabs
 
 ### 必要なもの
 
