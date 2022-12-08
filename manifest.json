@@ -43,6 +43,7 @@
   },
   "permissions": [
     "tabs",
-    "bookmarks"
+    "bookmarks",
+    "notifications"
   ]
 }

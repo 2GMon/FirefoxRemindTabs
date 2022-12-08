@@ -3,6 +3,8 @@ import * as ReactDOM from 'react-dom/client';
 
 import Button from '@mui/material/Button';
 
+import { getBookmarkDir, createBookmarkDir, createBookmark } from '../utils/bookmark';
+
 const PageAction = () => {
   const bookmarkDirName = '---RemindTabsBookmarkDir---';
 
@@ -13,26 +15,9 @@ const PageAction = () => {
     }
 
     const currentTab = await getCurrentTab();
-    const bookmark = await createBookmark(currentTab.title as string, currentTab.url as string);
+    const remindTimestamp = Math.floor((new Date()).getTime() / 1000) + 60;
+    const bookmark = await createBookmark(currentTab.title as string, currentTab.url as string, remindTimestamp);
     browser.tabs.remove(currentTab.id as number);
-  }
-
-  async function getBookmarkDir() {
-    return await browser.bookmarks.search({
-      query: bookmarkDirName
-    }).then((result) => {
-      if (result.length > 0) {
-        return result[0];
-      } else {
-        return undefined;
-      }
-    });
-  }
-
-  async function createBookmarkDir() {
-    return await browser.bookmarks.create({
-      title: bookmarkDirName
-    })
   }
 
   async function getCurrentTab() {
@@ -41,15 +26,6 @@ const PageAction = () => {
       currentWindow: true,
     }).then((result) => {
       return result[0];
-    });
-  }
-
-  async function createBookmark(title: string, url: string) {
-    const bookmarkDir = await getBookmarkDir();
-    return await browser.bookmarks.create({
-      parentId: bookmarkDir?.id,
-      title: title,
-      url: url,
     });
   }
 
