@@ -8,5 +8,10 @@
         "strict": true,
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true
-    }
+    },
+    "exclude": [
+        "build/*",
+        "my-config.js",
+        "webpack.config.mjs"
+    ]
 }

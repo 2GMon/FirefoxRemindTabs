@@ -40,5 +40,9 @@
   },
   "options_ui": {
     "page": "build/options.html"
-  }
+  },
+  "permissions": [
+    "tabs",
+    "bookmarks"
+  ]
 }
