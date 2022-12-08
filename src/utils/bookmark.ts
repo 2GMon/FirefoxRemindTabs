@@ -1,5 +1,7 @@
 const bookmarkDirName = '---RemindTabsBookmarkDir---';
 
+export const titleDelimiter = '*|-|-|-|*';
+
 export async function getBookmarkDir() {
 	return await browser.bookmarks.search({
 		query: bookmarkDirName
@@ -22,7 +24,7 @@ export async function createBookmark(title: string, url: string, remindTimestamp
 	const bookmarkDir = await getBookmarkDir();
 	return await browser.bookmarks.create({
 		parentId: bookmarkDir?.id,
-		title: `${remindTimestamp} -|-|- ${title}`,
+		title: `${remindTimestamp} ${titleDelimiter} ${title}`,
 		url: url,
 	});
 }
