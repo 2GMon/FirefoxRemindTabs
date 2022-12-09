@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import { getBookmarkDir, createBookmarkDir, createBookmark } from '../utils/bookmark';
+import { RemindSetterRow } from './remind-setter-row';
 
 const PageAction = () => {
-  const [remindDate, setRemindDate] = useState(new Date());
   const [now, setNow] = useState(new Date());
   const nowTimestamp = Math.floor(now.getTime() / 1000);
   const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 9, 0)
@@ -41,56 +39,26 @@ const PageAction = () => {
 
   return (
     <Box sx={{ width: "330px", height: "350px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(Math.floor(remindDate.getTime() / 1000)); }}>Specified Time</Button>
-        </Box>
-        <Box>
-          <DatePicker
-            selected={remindDate}
-            onChange={(date: Date) => setRemindDate(date)}
-            timeInputLabel="Time:"
-            showTimeInput
-            dateFormat="yyyy-MM-dd'T'HH:mm"
-            timeIntervals={1}
-            />
-        </Box>
+      <Box>
+        <RemindSetterRow text="Specified Time" timestamp={nowTimestamp + 60 * 60} remindSetter={onClick} dateTimePicker></RemindSetterRow>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(nowTimestamp + 60 * 60); }}>1 hour later</Button>
-        </Box>
-        <Box sx={{ width: "100%" }}>{new Date((nowTimestamp + 60 * 60) * 1000).toLocaleString()}</Box>
+      <Box>
+        <RemindSetterRow text="1 Hour later" timestamp={nowTimestamp + 60 * 60} remindSetter={onClick}></RemindSetterRow>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(nowTimestamp + 60 * 60 * 3); }}>3 hours later</Button>
-        </Box>
-        <Box sx={{ width: "100%" }}>{new Date((nowTimestamp + 60 * 60 * 3) * 1000).toLocaleString()}</Box>
+      <Box>
+        <RemindSetterRow text="3 Hours later" timestamp={nowTimestamp + 60 * 60 * 3} remindSetter={onClick}></RemindSetterRow>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(nowTimestamp + 60 * 60 * 24); }}>24 hours later</Button>
-        </Box>
-        <Box sx={{ width: "100%" }}>{new Date((nowTimestamp + 60 * 60 * 24) * 1000).toLocaleString()}</Box>
+      <Box>
+        <RemindSetterRow text="24 Hours later" timestamp={nowTimestamp + 60 * 60 * 24} remindSetter={onClick}></RemindSetterRow>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(tomorrowTimestamp); }}>Tomorrow</Button>
-        </Box>
-        <Box sx={{ width: "100%" }}>{new Date(tomorrowTimestamp * 1000).toLocaleString()}</Box>
+      <Box>
+        <RemindSetterRow text="Tomorrow" timestamp={tomorrowTimestamp} remindSetter={onClick}></RemindSetterRow>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(nextWeekTimestamp); }}>Next Week</Button>
-        </Box>
-        <Box sx={{ width: "100%" }}>{new Date(nextWeekTimestamp * 1000).toLocaleString()}</Box>
+      <Box>
+        <RemindSetterRow text="Next Week" timestamp={nextWeekTimestamp} remindSetter={onClick}></RemindSetterRow>
       </Box>
-      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <Box sx={{ width: "100%" }}>
-          <Button sx={{ width: "100%" }} onClick={async () => { await onClick(nextMonthTimestamp); }}>Next Month</Button>
-        </Box>
-        <Box sx={{ width: "100%" }}>{new Date(nextMonthTimestamp * 1000).toLocaleString()}</Box>
+      <Box>
+        <RemindSetterRow text="Next Month" timestamp={nextMonthTimestamp} remindSetter={onClick}></RemindSetterRow>
       </Box>
     </Box>
   );
