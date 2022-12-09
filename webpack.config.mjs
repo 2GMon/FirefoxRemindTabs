@@ -14,6 +14,7 @@ const dist = path.resolve(__dirname, 'build');
 const nodeModules = path.resolve(__dirname, 'node_modules');
 const reactUMD = path.resolve(nodeModules, 'react', 'umd');
 const reactDomUMD = path.resolve(nodeModules, 'react-dom', 'umd');
+const reactDatepicker = path.resolve(nodeModules, 'react-datepicker', 'dist');
 
 const config = {
     mode: 'production',
@@ -63,6 +64,7 @@ const config = {
                 { from: path.resolve(src, 'icons'), to: 'icons' },
                 { from: path.resolve(reactUMD, 'react.production.min.js'), to: 'react.production.min.js' },
                 { from: path.resolve(reactDomUMD, 'react-dom.production.min.js'), to: 'react-dom.production.min.js' },
+                { from: path.resolve(reactDatepicker, 'react-datepicker.css'), to: 'react-datepicker.css' },
             ]
         }),
         new MiniCssExtractPlugin({
