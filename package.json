@@ -19,7 +19,7 @@
   },
   "scripts": {
     "watch": "webpack -w",
-    "build": "webpack && web-ext --config my-config.js build --overwrite-dest",
+    "build": "webpack && web-ext --source-dir ./build --config my-config.js build --overwrite-dest",
     "lint": "web-ext --config my-config.js lint"
   },
   "dependencies": {

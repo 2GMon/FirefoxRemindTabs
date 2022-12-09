@@ -61,6 +61,7 @@ const config = {
         new RemoveEmptyScriptsPlugin(),
         new CopyPlugin({
             patterns: [
+                { from: path.resolve(__dirname, 'manifest.json'), to: 'manifest.json' },
                 { from: path.resolve(src, 'icons'), to: 'icons' },
                 { from: path.resolve(reactUMD, 'react.production.min.js'), to: 'react.production.min.js' },
                 { from: path.resolve(reactDomUMD, 'react-dom.production.min.js'), to: 'react-dom.production.min.js' },
@@ -85,7 +86,7 @@ const config = {
             filename: 'options.html',
             chunks: ['options', 'options.css']
         }),
-        new WebExtPlugin({ sourceDir: __dirname, firefox: 'firefoxdeveloperedition' }),
+        new WebExtPlugin({ sourceDir: dist, firefox: 'firefoxdeveloperedition' }),
     ],
 };
 export default config;
