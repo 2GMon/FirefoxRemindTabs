@@ -26,8 +26,7 @@ const config = {
         background: path.resolve(src, 'background_script.ts'),
         options: path.resolve(src, 'options/script.ts'),
         "options.css": path.resolve(src, 'options/style.css'),
-        browserAction: path.resolve(src, 'browserAction/script.ts'),
-        "browserAction.css": path.resolve(src, 'browserAction/style.css'),
+        browserAction: path.resolve(src, 'browserAction/index.tsx'),
         pageAction: path.resolve(src, 'pageAction/index.tsx'),
     },
     output: {
@@ -74,7 +73,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: path.resolve(src, 'browserAction/index.html'),
             filename: 'browserAction.html',
-            chunks: ['browserAction', 'browserAction.css']
+            chunks: ['browserAction']
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(src, 'pageAction/index.html'),

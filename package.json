@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@mui/icons-material": "^5.10.16",
     "@types/firefox-webext-browser": "^94.0.1",
     "@types/react": "^18.0.26",
     "@types/react-datepicker": "^4.8.0",
