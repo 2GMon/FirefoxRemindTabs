@@ -57,5 +57,5 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 	}
 
 	openTabs();
-	setInterval(openTabs, 60 * 1000);
+	setInterval(openTabs, 10 * 1000);
 })();
