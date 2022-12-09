@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import Box from '@mui/material/Box';
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
 
 import { getBookmarkDir, createBookmarkDir, createBookmark } from '../utils/bookmark';
 import { RemindSetterRow } from './remind-setter-row';
 
 const PageAction = () => {
   const [now, setNow] = useState(new Date());
-  const nowTimestamp = Math.floor(now.getTime() / 1000);
+  const nowTimestamp = Math.floor(now.getTime() / 1000) - now.getSeconds();
   const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 9, 0)
   const tomorrowTimestamp = Math.floor(tomorrow.getTime() / 1000);
   const nextWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7, 9, 0)
@@ -38,28 +39,16 @@ const PageAction = () => {
   }
 
   return (
-    <Box sx={{ width: "330px", height: "350px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-      <Box>
+    <Box sx={{ width: "330px", height: "max-content" }}>
+      <Stack divider={<Divider flexItem />} spacing={1}>
         <RemindSetterRow text="Specified Time" timestamp={nowTimestamp + 60 * 60} remindSetter={onClick} dateTimePicker></RemindSetterRow>
-      </Box>
-      <Box>
         <RemindSetterRow text="1 Hour later" timestamp={nowTimestamp + 60 * 60} remindSetter={onClick}></RemindSetterRow>
-      </Box>
-      <Box>
         <RemindSetterRow text="3 Hours later" timestamp={nowTimestamp + 60 * 60 * 3} remindSetter={onClick}></RemindSetterRow>
-      </Box>
-      <Box>
         <RemindSetterRow text="24 Hours later" timestamp={nowTimestamp + 60 * 60 * 24} remindSetter={onClick}></RemindSetterRow>
-      </Box>
-      <Box>
         <RemindSetterRow text="Tomorrow" timestamp={tomorrowTimestamp} remindSetter={onClick}></RemindSetterRow>
-      </Box>
-      <Box>
         <RemindSetterRow text="Next Week" timestamp={nextWeekTimestamp} remindSetter={onClick}></RemindSetterRow>
-      </Box>
-      <Box>
         <RemindSetterRow text="Next Month" timestamp={nextMonthTimestamp} remindSetter={onClick}></RemindSetterRow>
-      </Box>
+      </Stack>
     </Box>
   );
 }

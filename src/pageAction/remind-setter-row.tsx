@@ -28,8 +28,15 @@ export function RemindSetterRow({ timestamp, text, remindSetter, dateTimePicker 
   return (
     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <Box sx={{ width: "100%" }}>
-        <Button sx={{ width: "100%" }} onClick={async () => { await remindSetter(Math.floor(remindDate.getTime() / 1000)); }}>{text}</Button>
+        <Button
+          sx={{ width: "100%" }}
+          variant="outlined"
+          onClick={async () => { await remindSetter(Math.floor(remindDate.getTime() / 1000)); }}
+        >
+          {text}
+        </Button>
       </Box>
+      <Box sx={{ width: "20px" }}></Box>
       <Box sx={{ width: "100%" }}>
         {datetimeItem}
       </Box>
