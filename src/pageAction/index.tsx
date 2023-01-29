@@ -41,7 +41,7 @@ const PageAction = () => {
   return (
     <Box sx={{ width: "330px", height: "max-content" }}>
       <Stack divider={<Divider flexItem />} spacing={1}>
-        <RemindSetterRow text="Specified Time" timestamp={nowTimestamp + 60 * 60} remindSetter={onClick} dateTimePicker></RemindSetterRow>
+        <RemindSetterRow text="Specified Time" timestamp={tomorrowTimestamp} remindSetter={onClick} dateTimePicker></RemindSetterRow>
         <RemindSetterRow text="1 Hour later" timestamp={nowTimestamp + 60 * 60} remindSetter={onClick}></RemindSetterRow>
         <RemindSetterRow text="3 Hours later" timestamp={nowTimestamp + 60 * 60 * 3} remindSetter={onClick}></RemindSetterRow>
         <RemindSetterRow text="24 Hours later" timestamp={nowTimestamp + 60 * 60 * 24} remindSetter={onClick}></RemindSetterRow>

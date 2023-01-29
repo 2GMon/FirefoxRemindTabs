@@ -18,9 +18,9 @@ export function RemindSetterRow({ timestamp, text, remindSetter, dateTimePicker 
         selected={remindDate}
         onChange={(date: Date) => setRemindDate(date)}
         timeInputLabel="Time:"
-        showTimeInput
+        showTimeSelect
         dateFormat="yyyy-MM-dd'T'HH:mm"
-        timeIntervals={1}
+        timeIntervals={15}
       />
     </Box>)
     : (<Box sx={{ width: "100%" }}>{new Date(timestamp * 1000).toLocaleString()}</Box>);
