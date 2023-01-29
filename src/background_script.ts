@@ -1,4 +1,5 @@
 import { titleDelimiter, getBookmarks, removeBookmark } from './utils/bookmark';
+import { getRemindTabsStatus } from './utils/settings';
 
 async function sleep(msec: number) {
 	return new Promise(resolve => setTimeout(resolve, msec));
@@ -41,6 +42,10 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 
 (() => {
 	const openTabs = async () => {
+		const disabled = await getRemindTabsStatus();
+		if (disabled) {
+			return;
+		}
 		console.log('open');
 		const timestamp = Math.floor((new Date()).getTime() / 1000);
 		const bookmarks = await getBookmarks();
