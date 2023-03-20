@@ -54,7 +54,6 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 			const tab = await openTab(bookmark);
 			await discardTab(tab);
 			await removeBookmark(bookmark);
-			await sleep(100);
 		}
 		if (filteredBookmarks.length > 0) {
 			await notify(filteredBookmarks);
