@@ -13,14 +13,14 @@
     "react-datepicker": "^4.8.0",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.3",
-    "web-ext-plugin": "^2.7.0",
+    "web-ext-plugin": "^2.10.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-remove-empty-scripts": "^1.0.1"
   },
   "scripts": {
     "watch": "webpack -w",
-    "build": "webpack && web-ext --source-dir ./build --config my-config.js build --overwrite-dest",
+    "build": "webpack && web-ext --source-dir ./build --config my-config.js build --overwrite-dest && zip ./web-ext-artifacts/firefox-remind-tabs-src.zip manifest.json my-config.js package.json src/ tsconfig.json webpack.config.mjs yarn.lock",
     "lint": "web-ext --config my-config.js lint"
   },
   "dependencies": {

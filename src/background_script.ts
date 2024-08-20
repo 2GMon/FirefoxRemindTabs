@@ -1,5 +1,5 @@
 import { titleDelimiter, getBookmarks, removeBookmark } from './utils/bookmark';
-import { getRemindTabsStatus } from './utils/settings';
+import { getRemindTabsStatus, getDiscardStatus } from './utils/settings';
 
 async function sleep(msec: number) {
 	return new Promise(resolve => setTimeout(resolve, msec));
@@ -52,7 +52,10 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 		const filteredBookmarks = narrowDownBookmarks(timestamp, bookmarks);
 		for (const bookmark of filteredBookmarks) {
 			const tab = await openTab(bookmark);
-			await discardTab(tab);
+			const isDiscard = await getDiscardStatus();
+			if (isDiscard) {
+				await discardTab(tab);
+			}
 			await removeBookmark(bookmark);
 		}
 		if (filteredBookmarks.length > 0) {
@@ -61,5 +64,5 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 	}
 
 	openTabs();
-	setInterval(openTabs, 10 * 1000);
+	setInterval(openTabs, 15 * 1000);
 })();

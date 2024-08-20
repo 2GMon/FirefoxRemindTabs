@@ -8,12 +8,13 @@ import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 
 import { getBookmarks, removeBookmark, titleDelimiter } from '../utils/bookmark';
-import { getRemindTabsStatus, setRemindTabsStatus } from '../utils/settings';
+import { getDiscardStatus, getRemindTabsStatus, setDiscardStatus, setRemindTabsStatus } from '../utils/settings';
 
 const BrowserAction = () => {
   const [bookmarks, setBookmarks] = useState<browser.bookmarks.BookmarkTreeNode[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [discard, setDiscard] = useState<boolean>(false);
   const [statusChanged, setStatauChanged] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,6 +30,10 @@ const BrowserAction = () => {
     (async () => {
       const disabled = await getRemindTabsStatus();
       setDisabled(disabled)
+
+      const discard = await getDiscardStatus();
+      setDiscard(discard)
+
       setStatauChanged(false);
     })()
   }, [statusChanged]);
@@ -58,7 +63,14 @@ const BrowserAction = () => {
     setStatauChanged(true);
   }
 
-  const label = { inputProps: { 'aria-label': 'disable RemindTabs' } };
+  const toggleDiscardTabs = async () => {
+    const discard = await getDiscardStatus();
+    setDiscardStatus(!discard);
+    setStatauChanged(true);
+  }
+
+  const label = { inputProps: { 'aria-label': 'Enable RemindTabs' } };
+  const discardLabel = { inputProps: { 'aria-label': 'Discard tab when opening' } };
 
   const items = bookmarks.map(bookmark =>{
     const timestamp = getTimestamp(bookmark);
@@ -90,9 +102,24 @@ const BrowserAction = () => {
 
   return (
     <Box sx={{ width: "max-content", height: "max-content" }}>
-      <Box sx={{ width: "max-content", minWidth: "330px", maxWidth: "500px", height: "max-content" }}>
-        <Switch {...label} checked={!disabled}
-        onChange={ async () => { toggleDisableRemindTabs() } } />
+      <Box sx={{ width: "max-content", minWidth: "330px", maxWidth: "500px", height: "max-content",
+        display: "flex" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box>
+            Enabled
+          </Box>
+          <Box>
+            <Switch {...label} checked={!disabled}
+            onChange={ async () => { toggleDisableRemindTabs() } } />
+          </Box>
+          <Box>
+            Discard tab when opening
+          </Box>
+          <Box>
+            <Switch {...discardLabel} checked={discard}
+            onChange={ async () => { toggleDiscardTabs() } } />
+          </Box>
+        </Box>
       </Box>
       <Divider />
       <Box sx={{ width: "max-content", minWidth: "330px", maxWidth: "500px", height: "max-content", maxHeight: "400px" }}>
