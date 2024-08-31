@@ -1,8 +1,13 @@
 import { titleDelimiter, getBookmarks, removeBookmark } from './utils/bookmark';
-import { getRemindTabsStatus, getDiscardStatus } from './utils/settings';
+import { getDiscardStatus } from './utils/settings';
 
-async function sleep(msec: number) {
-	return new Promise(resolve => setTimeout(resolve, msec));
+async function isBrowserIdle(sec: number) {
+	const idleState = await browser.idle.queryState(sec);
+	if (idleState === "active") {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 async function openTab(bookmark: browser.bookmarks.BookmarkTreeNode) {
@@ -42,8 +47,9 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 
 (() => {
 	const openTabs = async () => {
-		const disabled = await getRemindTabsStatus();
-		if (disabled) {
+		const idled = await isBrowserIdle(600);
+		if (idled) {
+			console.log("Idle")
 			return;
 		}
 		console.log('open');

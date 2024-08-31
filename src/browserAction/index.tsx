@@ -8,12 +8,11 @@ import Stack from '@mui/material/Stack';
 import Switch from '@mui/material/Switch';
 
 import { getBookmarks, removeBookmark, titleDelimiter } from '../utils/bookmark';
-import { getDiscardStatus, getRemindTabsStatus, setDiscardStatus, setRemindTabsStatus } from '../utils/settings';
+import { getDiscardStatus, setDiscardStatus } from '../utils/settings';
 
 const BrowserAction = () => {
   const [bookmarks, setBookmarks] = useState<browser.bookmarks.BookmarkTreeNode[]>([]);
   const [loaded, setLoaded] = useState<boolean>(false);
-  const [disabled, setDisabled] = useState<boolean>(false);
   const [discard, setDiscard] = useState<boolean>(false);
   const [statusChanged, setStatauChanged] = useState<boolean>(false);
 
@@ -28,9 +27,6 @@ const BrowserAction = () => {
 
   useEffect(() => {
     (async () => {
-      const disabled = await getRemindTabsStatus();
-      setDisabled(disabled)
-
       const discard = await getDiscardStatus();
       setDiscard(discard)
 
@@ -55,12 +51,6 @@ const BrowserAction = () => {
   const _removeBookmark = async (bookmark: browser.bookmarks.BookmarkTreeNode) => {
     await removeBookmark(bookmark);
     setLoaded(false);
-  }
-
-  const toggleDisableRemindTabs = async () => {
-    const disabled = await getRemindTabsStatus();
-    setRemindTabsStatus(!disabled);
-    setStatauChanged(true);
   }
 
   const toggleDiscardTabs = async () => {
@@ -105,13 +95,6 @@ const BrowserAction = () => {
       <Box sx={{ width: "max-content", minWidth: "330px", maxWidth: "500px", height: "max-content",
         display: "flex" }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Box>
-            Enabled
-          </Box>
-          <Box>
-            <Switch {...label} checked={!disabled}
-            onChange={ async () => { toggleDisableRemindTabs() } } />
-          </Box>
           <Box>
             Discard tab when opening
           </Box>
