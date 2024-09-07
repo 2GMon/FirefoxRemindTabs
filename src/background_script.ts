@@ -46,10 +46,17 @@ function narrowDownBookmarks(timestamp: number, bookmarks: browser.bookmarks.Boo
 }
 
 (() => {
+	let idleLastTime = new Date().getTime() / 1000.0;
 	const openTabs = async () => {
 		const idled = await isBrowserIdle(600);
 		if (idled) {
 			console.log("Idle")
+			idleLastTime = new Date().getTime() / 1000.0;
+			return;
+		}
+		const now = new Date().getTime() / 1000.0;
+		if (now - idleLastTime < 120) {
+			console.log("waking up")
 			return;
 		}
 		console.log('open');
